@@ -71,10 +71,37 @@ public class WebDriverUtils {
     }
 
     // Returning a runnable, as I may want to use this action outside the scope of invokeAgain method.
-    public Runnable getWaitForElementAction(String xpath, int waitTime) {
+    private Runnable getWaitForElementAction(String xpath, int waitTime) {
         return () -> {
             Wait<WebDriver> wait = new WebDriverWait(webDriver, waitTime);
             wait.until(isElementVisible(xpath));
+        };
+    }
+
+    public boolean clickElement(String xpath) throws Exception {
+        System.out.println(String.format("Clicking - xpath: %s", xpath));
+        return invokeAgainInCaseOfFailure(getClickElementAction(xpath, 5));
+    }
+
+    private Runnable getClickElementAction(String xpath, int waitTime) throws Exception {
+        return () -> {
+            getWaitForElementAction(xpath, waitTime).run(); // Not trying again, as it will be handled as part of clickElement.
+            WebElement webElement = webDriver.findElement(By.xpath(xpath));
+            webElement.click();
+        };
+    }
+
+    public boolean sendKeys(String xpath, String text) throws Exception {
+        System.out.println(String.format("Sending keys - xpath: %s  Text: %s", xpath, text));
+        return invokeAgainInCaseOfFailure(getSendKeysAction(xpath, text, 5));
+    }
+
+    private Runnable getSendKeysAction(String xpath, String text, int waitTime) {
+        return () -> {
+            getWaitForElementAction(xpath, waitTime).run();
+            WebElement webElement = webDriver.findElement(By.xpath(xpath));
+            webElement.clear();
+            webElement.sendKeys();
         };
     }
 }
