@@ -6,9 +6,9 @@ import utilities.BaseScenario;
 /**
  * Created by akash on 19/11/17.
  */
-public class SimpleTest extends BaseScenario {
+public class SimpleTest2 extends BaseScenario {
     @Test
-    public void simpleTest() {
-        webDriver.get("https://www.cleartrip.com");
+    public void test2() {
+        webDriver.get("http://google.com");
     }
 }
