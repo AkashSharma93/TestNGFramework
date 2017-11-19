@@ -1,5 +1,6 @@
 package utilities;
 
+import dataaccess.PropertyReader;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,6 +17,7 @@ public class BaseScenario {
     @BeforeSuite
     public void setupSuite() {
         ChromeDriverManager.getInstance().setup();
+        PropertyReader.loadConfigProperties();
     }
 
     @BeforeMethod

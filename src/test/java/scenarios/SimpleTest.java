@@ -1,5 +1,6 @@
 package scenarios;
 
+import dataaccess.PropertyReader;
 import org.testng.annotations.Test;
 import utilities.BaseScenario;
 
@@ -9,6 +10,6 @@ import utilities.BaseScenario;
 public class SimpleTest extends BaseScenario {
     @Test
     public void simpleTest() {
-        webDriver.get("https://www.cleartrip.com");
+        webDriver.get(PropertyReader.readItem("url"));
     }
 }
