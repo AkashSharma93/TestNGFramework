@@ -63,17 +63,17 @@ public class ExcelReader {
     }
 
     public String getCellValue(Cell cell) {
-        switch (cell.getCellType()) {
-            case Cell.CELL_TYPE_STRING:
+        switch (cell.getCellTypeEnum()) {
+            case STRING:
                 return cell.getStringCellValue();
 
-            case Cell.CELL_TYPE_NUMERIC:
+            case NUMERIC:
                 return String.valueOf(cell.getNumericCellValue());
 
-            case Cell.CELL_TYPE_BOOLEAN:
+            case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());
 
-            case Cell.CELL_TYPE_FORMULA:
+            case FORMULA:
                 return cell.getCellFormula();
 
             default:
