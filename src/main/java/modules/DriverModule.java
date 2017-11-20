@@ -1,16 +1,16 @@
 package modules;
 
 import dataaccess.PropertyReader;
-import genericshelper.GenericModule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.Assert;
 
 /**
  * Created by akash on 20/11/17.
  */
-public class DriverModule implements GenericModule {
+public class DriverModule extends AbstractModule {
     public WebDriver createDriverInstance() {
         String browserType = PropertyReader.readItem("browser");
         if (browserType.equalsIgnoreCase("chrome")) {
@@ -25,6 +25,7 @@ public class DriverModule implements GenericModule {
     public void navigateToAppUrl(WebDriver webDriver) {
         String url = PropertyReader.readItem("url");
         webDriver.navigate().to(url);
+        Assert.assertTrue(pageHeaderPanel.isLogoDisplayed(webDriver), "Logo is not displayed.");
     }
 
     public void quitDriver(WebDriver webDriver) {

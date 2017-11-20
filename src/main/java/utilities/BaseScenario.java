@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
  * Created by akash on 19/11/17.
  */
 public class BaseScenario extends GenericsImpl {
+
     @BeforeSuite
     public void setupSuite() {
         ChromeDriverManager.getInstance().setup();
