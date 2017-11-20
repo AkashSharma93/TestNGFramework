@@ -101,7 +101,7 @@ public class WebDriverUtils {
             getWaitForElementAction(xpath, waitTime).run();
             WebElement webElement = webDriver.findElement(By.xpath(xpath));
             webElement.clear();
-            webElement.sendKeys();
+            webElement.sendKeys(text);
         };
     }
 }
