@@ -40,11 +40,24 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
                     .replace("yearToken", year));
 
             wdUtils.clickElement(searchButton);
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    public void waitForProgressBarToDisappear(WebDriver webDriver) {
+        WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
+        int timeout = 30;  // Wait for progress bar for upto 1 min. [waitForElement tries twice. So, 30 * 2 = 60 sec.]
+        int timeWaited = 0;
+
+        System.out.println("Waiting for Progress Bar to disappear. Timeout [in sec]: " + timeout * 2);
+        while (wdUtils.waitForElement(progressBar, 1)) {
+            timeWaited++;
+            if (timeWaited > timeout) break;
+        }
+
+        System.out.println("Completed waiting for Progress Bar to disappear. Time elapsed: " + timeWaited);
     }
 }

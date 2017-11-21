@@ -5,6 +5,7 @@ import genericshelper.GenericsImpl;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,6 +17,7 @@ import java.lang.reflect.Method;
  * Created by akash on 19/11/17.
  */
 public class BaseScenario extends GenericsImpl {
+    protected ThreadLocal<WebDriver> webDriverPool = new ThreadLocal<>();
 
     @BeforeSuite
     public void setupSuite() {
@@ -29,6 +31,7 @@ public class BaseScenario extends GenericsImpl {
     @BeforeMethod
     public void setupTest(Method method) {
         System.out.println("Starting test method - " + method.getName());
+        webDriverPool.set(driver.createDriverInstance());
     }
 
     @AfterMethod
@@ -39,5 +42,7 @@ public class BaseScenario extends GenericsImpl {
                 System.out.println(result.getThrowable());
             }
         }
+        webDriverPool.get().quit();
+        webDriverPool.remove();
     }
 }

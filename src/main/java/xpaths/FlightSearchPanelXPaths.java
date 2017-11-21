@@ -10,4 +10,5 @@ public interface FlightSearchPanelXPaths {
     String fieldSuggestion = "//ul[@class='autoComplete']//a[text()='airportName']";
     String datePicker = "//td[@data-handler='selectDay' and @data-month='monthToken' and @data-year='yearToken']/a[text()='dayToken']";
     String searchButton = "//input[@id='SearchBtn' and @value='Search flights']";
+    String progressBar = "//div[@class='updatingModal whiteWash' and contains(@style, 'display: block')]/following-sibling::div[@class='loaderContainer' and contains(@style, 'display: none')]";
 }

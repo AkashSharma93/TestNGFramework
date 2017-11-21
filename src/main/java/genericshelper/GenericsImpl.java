@@ -1,6 +1,7 @@
 package genericshelper;
 
 import modules.DriverModule;
+import modules.FlightResultsPage;
 import modules.FlightSearchPage;
 
 /**
@@ -11,10 +12,12 @@ public abstract class GenericsImpl {
     // Modules
     protected DriverModule driver;
     protected FlightSearchPage flightSearchPage;
+    protected FlightResultsPage flightResultsPage;
 
     public GenericsImpl() {
-        flightSearchPage = new FlightSearchPage();
         driver = new DriverModule();
+        flightSearchPage = new FlightSearchPage();
+        flightResultsPage = new FlightResultsPage();
     }
 
     /**

@@ -11,9 +11,9 @@ public class FlightBookTest extends BaseScenario {
 
     @Test
     public void bookFlight() {
-        WebDriver webDriver = given(driver).createDriverInstance();
+        WebDriver webDriver = webDriverPool.get();
         and(driver).navigateToAppUrl(webDriver);
         then(flightSearchPage).searchForFlights(webDriver);
-        and(driver).quitDriver(webDriver);
+        and(flightResultsPage).bookCheapestFlight(webDriver);
     }
 }

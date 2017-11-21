@@ -10,5 +10,6 @@ public class FlightSearchPage extends AbstractModule {
 
     public void searchForFlights(WebDriver webDriver) {
         Assert.assertTrue(flightSearchPanel.searchForFlights(webDriver), "Failed while searching for flights.");
+        flightSearchPanel.waitForProgressBarToDisappear(webDriver);
     }
 }
