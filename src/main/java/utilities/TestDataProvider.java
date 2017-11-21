@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestDataProvider {
 
-    @DataProvider(name = "test-data")
+    @DataProvider(name = "test-data", parallel = true)
     public Iterator<Object[]> getTestData(Method method) {
         String testName = method.getName();
         List<Object[]> testData = new ArrayList<>();
