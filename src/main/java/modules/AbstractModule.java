@@ -1,5 +1,6 @@
 package modules;
 
+import fragments.BookingPanel;
 import fragments.FlightResultsPanel;
 import fragments.FlightSearchPanel;
 import fragments.PageHeaderPanel;
@@ -14,10 +15,12 @@ public class AbstractModule implements GenericModule {
     protected FlightSearchPanel flightSearchPanel;
     protected FlightResultsPanel flightResultsPanel;
     protected PageHeaderPanel pageHeaderPanel;
+    protected BookingPanel bookingPanel;
 
     public AbstractModule() {
         flightSearchPanel = new FlightSearchPanel();
         flightResultsPanel = new FlightResultsPanel();
         pageHeaderPanel = new PageHeaderPanel();
+        bookingPanel = new BookingPanel();
     }
 }
