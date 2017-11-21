@@ -14,4 +14,15 @@ public class PageHeaderPanel implements PageHeaderPanelXPaths {
         WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
         return wdUtils.waitForElement(logo, waitTime);
     }
+
+    public boolean openHomePage(WebDriver webDriver) {
+        WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
+        try {
+            wdUtils.clickElement(logo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

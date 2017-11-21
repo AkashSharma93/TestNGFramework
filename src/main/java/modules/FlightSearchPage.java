@@ -14,4 +14,12 @@ public class FlightSearchPage extends AbstractModule {
         Assert.assertTrue(flightSearchPanel.searchForFlights(webDriver, testData), "Failed while searching for flights.");
         flightSearchPanel.waitForProgressBarToDisappear(webDriver);
     }
+
+    public void openHomePage(WebDriver webDriver) {
+        Assert.assertTrue(pageHeaderPanel.openHomePage(webDriver), "Failed while opening home page.");
+    }
+
+    public void clickSavedSearch(WebDriver webDriver, Map<String, String> testData) {
+        Assert.assertTrue(flightSearchPanel.openSavedSearch(webDriver, testData), "Failed to open saved search.");
+    }
 }

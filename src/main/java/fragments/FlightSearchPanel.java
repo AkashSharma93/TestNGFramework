@@ -72,4 +72,19 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
 
         System.out.println("Completed waiting for Progress Bar to disappear. Time elapsed: " + timeElapsed);
     }
+
+    public boolean openSavedSearch(WebDriver webDriver, Map<String, String> testData) {
+        WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
+        System.out.println("Opening Saved Search.");
+        String source = testData.get(TestDataHeaders.fromCity);
+        String destination = testData.get(TestDataHeaders.toCity);
+        try {
+            wdUtils.clickElement(savedSearch.replace("sourceToken", source)
+                    .replace("destinationToken", destination));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
