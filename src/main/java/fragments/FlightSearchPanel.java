@@ -49,13 +49,21 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
 
     public void waitForProgressBarToDisappear(WebDriver webDriver) {
         WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
-        int timeout = 30;  // Wait for progress bar for upto 1 min. [waitForElement tries twice. So, 30 * 2 = 60 sec.]
-        int timeWaited = 0;
+        int timeout = 60;   // seconds
+        long startTime = System.currentTimeMillis();
 
-        System.out.println("Waiting for Progress Bar to disappear. Timeout [in sec]: " + timeout * 2);
+        System.out.println("Waiting for Progress Bar to disappear. Timeout [in sec]: " + timeout);
         while (wdUtils.waitForElement(progressBar, 1)) {
-            timeWaited++;
-            if (timeWaited > timeout) break;
+            try {
+                Thread.sleep(500);  // Retry after 500 ms.
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            long currentTime = System.currentTimeMillis();
+            int timeElapsed = (int) (currentTime - startTime) / 1000;
+            if (timeElapsed > timeout) {
+                break;
+            }
         }
 
         System.out.println("Completed waiting for Progress Bar to disappear. Time elapsed: " + timeWaited);
