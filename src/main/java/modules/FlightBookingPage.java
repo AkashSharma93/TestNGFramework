@@ -21,4 +21,8 @@ public class FlightBookingPage extends AbstractModule {
     public void enterTravellerDetails(WebDriver webDriver) {
         Assert.assertTrue(bookingPanel.enterTravellerDetails(webDriver), "Failed to enter traveller details.");
     }
+
+    public void verifyPaymentsSection(WebDriver webDriver) {
+        Assert.assertTrue(bookingPanel.verifyPaymentsSection(webDriver), "Payments section is not open.");
+    }
 }

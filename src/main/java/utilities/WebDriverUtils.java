@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class WebDriverUtils {
     private WebDriver webDriver;
+    private int timeout = 10;  // Default timeout until repeated tries.
 
     public WebDriverUtils(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -80,7 +82,7 @@ public class WebDriverUtils {
 
     public boolean clickElement(String xpath) throws Exception {
         System.out.println(String.format("Clicking - xpath: %s", xpath));
-        return invokeAgainInCaseOfFailure(getClickElementAction(xpath, 5));
+        return invokeAgainInCaseOfFailure(getClickElementAction(xpath, timeout));
     }
 
     private Runnable getClickElementAction(String xpath, int waitTime) throws Exception {
@@ -93,7 +95,7 @@ public class WebDriverUtils {
 
     public boolean sendKeys(String xpath, String text) throws Exception {
         System.out.println(String.format("Sending keys - xpath: %s  Text: %s", xpath, text));
-        return invokeAgainInCaseOfFailure(getSendKeysAction(xpath, text, 5));
+        return invokeAgainInCaseOfFailure(getSendKeysAction(xpath, text, timeout));
     }
 
     private Runnable getSendKeysAction(String xpath, String text, int waitTime) {
@@ -103,5 +105,16 @@ public class WebDriverUtils {
             webElement.clear();
             webElement.sendKeys(text);
         };
+    }
+
+    public boolean selectFromList(String xpath, String option) throws Exception {
+        System.out.println(String.format("Selecting - xpath: %s Option: %s", xpath, option));
+        if (!waitForElement(xpath, timeout)) {
+            return false;
+        }
+        WebElement selectField = webDriver.findElement(By.xpath(xpath));
+        Select select = new Select(selectField);
+        select.selectByVisibleText(option);
+        return true;
     }
 }

@@ -51,6 +51,7 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
         WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
         int timeout = 60;   // seconds
         long startTime = System.currentTimeMillis();
+        int timeElapsed = 0;    // Initializing here, to print it in the end for the method.
 
         System.out.println("Waiting for Progress Bar to disappear. Timeout [in sec]: " + timeout);
         while (wdUtils.waitForElement(progressBar, 1)) {
@@ -60,12 +61,12 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
                 e.printStackTrace();
             }
             long currentTime = System.currentTimeMillis();
-            int timeElapsed = (int) (currentTime - startTime) / 1000;
+            timeElapsed = (int) (currentTime - startTime) / 1000;
             if (timeElapsed > timeout) {
                 break;
             }
         }
 
-        System.out.println("Completed waiting for Progress Bar to disappear. Time elapsed: " + timeWaited);
+        System.out.println("Completed waiting for Progress Bar to disappear. Time elapsed: " + timeElapsed);
     }
 }

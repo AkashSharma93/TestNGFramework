@@ -18,6 +18,7 @@ public class FlightBookTest extends BaseScenario {
 
         when(flightBookingPage).enterItineraryDetails(webDriver);
         then(flightBookingPage).enterEmailDetails(webDriver);
-      //  and(flightBookingPage).enterTravellerDetails(webDriver);
+        and(flightBookingPage).enterTravellerDetails(webDriver);
+        and(flightBookingPage).verifyPaymentsSection(webDriver);
     }
 }
