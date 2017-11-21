@@ -11,6 +11,6 @@ public interface FlightSearchPanelXPaths {
     String datePicker = "//td[@data-handler='selectDay' and @data-month='monthToken' and @data-year='yearToken']/a[text()='dayToken']";
     String searchButton = "//input[@id='SearchBtn' and @value='Search flights']";
     String progressBar = "//div[@class='updatingModal whiteWash' and contains(@style, 'display: block')]/following-sibling::div[@class='loaderContainer' and not(contains(@style, 'display: none'))]";
-    String savedSearch = "//strong[text()='sourceToken → destinationToken']";
+    String savedSearch = "//strong[text()='sourceToken ⇄ destinationToken']";
     String roundTripButton = "//input[@type='radio' and @id='RoundTrip']";
 }
