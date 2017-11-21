@@ -11,6 +11,7 @@ public interface TestDataHeaders {
     String fromAirport      =   "FromAirport";
     String toAirport        =   "ToAirport";
     String fromDate         =   "FromDate";
+    String toDate           =   "ToDate";
     String travellerName    =   "TravellerName";
     String dateOfBirth      =   "DateOfBirth";
     String passportNumber   =   "PassportNumber";

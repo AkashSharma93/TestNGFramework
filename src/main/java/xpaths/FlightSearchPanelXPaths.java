@@ -12,4 +12,5 @@ public interface FlightSearchPanelXPaths {
     String searchButton = "//input[@id='SearchBtn' and @value='Search flights']";
     String progressBar = "//div[@class='updatingModal whiteWash' and contains(@style, 'display: block')]/following-sibling::div[@class='loaderContainer' and not(contains(@style, 'display: none'))]";
     String savedSearch = "//strong[text()='sourceToken → destinationToken']";
+    String roundTripButton = "//input[@type='radio' and @id='RoundTrip']";
 }

@@ -25,22 +25,17 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
         String airportXpathToken = "airportName";
 
         String fromDate = testData.get(TestDataHeaders.fromDate);
+        String toDate = testData.get(TestDataHeaders.toDate);
         try {
+            wdUtils.clickElement(roundTripButton);
             wdUtils.sendKeys(fromField, fromCity);
             wdUtils.clickElement(fieldSuggestion.replace(airportXpathToken, fromAirport));
 
             wdUtils.sendKeys(toField, toCity);
             wdUtils.clickElement(fieldSuggestion.replace(airportXpathToken, toAirport));
 
-            String[] tokens = fromDate.split("/");
-            String day = tokens[0];
-            String month = (Integer.parseInt(tokens[1]) - 1) + "";
-            String year = tokens[2];
-
-            wdUtils.clickElement(datePicker
-                    .replace("dayToken", day)
-                    .replace("monthToken", month)
-                    .replace("yearToken", year));
+            selectDate(fromDate, wdUtils);
+            selectDate(toDate, wdUtils);
 
             wdUtils.clickElement(searchButton);
         } catch (Exception e) {
@@ -48,6 +43,18 @@ public class FlightSearchPanel implements FlightSearchPanelXPaths {
             return false;
         }
         return true;
+    }
+
+    private void selectDate(String date, WebDriverUtils wdUtils) throws Exception {
+        String[] tokens = date.split("/");
+        String day = tokens[0];
+        String month = (Integer.parseInt(tokens[1]) - 1) + "";
+        String year = tokens[2];
+
+        wdUtils.clickElement(datePicker
+                .replace("dayToken", day)
+                .replace("monthToken", month)
+                .replace("yearToken", year));
     }
 
     public void waitForProgressBarToDisappear(WebDriver webDriver) {
