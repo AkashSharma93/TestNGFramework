@@ -18,7 +18,7 @@ public class ExcelReader {
 
     private Workbook workbook;
 
-    private static ExcelReader getInstance() {
+    public static ExcelReader getInstance() {
         try {
             if (excelReader == null) {
                 excelReader = new ExcelReader();

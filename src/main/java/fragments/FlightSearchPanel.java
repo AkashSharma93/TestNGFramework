@@ -1,9 +1,12 @@
 package fragments;
 
+import dataaccess.excelhelper.TestDataHeaders;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import utilities.WebDriverUtils;
 import xpaths.FlightSearchPanelXPaths;
+
+import java.util.Map;
 
 /**
  * Created by akash on 20/11/17.
@@ -11,17 +14,17 @@ import xpaths.FlightSearchPanelXPaths;
 public class FlightSearchPanel implements FlightSearchPanelXPaths {
     private int waitTime = 10;
 
-    public boolean searchForFlights(WebDriver webDriver) {
+    public boolean searchForFlights(WebDriver webDriver, Map<String, String> testData) {
         WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
         Assert.assertTrue(wdUtils.waitForElement(searchFlightForm, waitTime), "Flight search form not found.");
 
-        String fromCity = "Bangalore";
-        String toCity = "Tokyo";
-        String fromAirport = "Bangalore, IN - Kempegowda International Airport (BLR)";
-        String toAirport = "Tokyo, JP - Narita (NRT)";
+        String fromCity = testData.get(TestDataHeaders.fromCity);
+        String toCity = testData.get(TestDataHeaders.toCity);
+        String fromAirport = testData.get(TestDataHeaders.fromAirport);
+        String toAirport = testData.get(TestDataHeaders.toAirport);
         String airportXpathToken = "airportName";
 
-        String fromDate = "30/11/2017";
+        String fromDate = testData.get(TestDataHeaders.fromDate);
         try {
             wdUtils.sendKeys(fromField, fromCity);
             wdUtils.clickElement(fieldSuggestion.replace(airportXpathToken, fromAirport));

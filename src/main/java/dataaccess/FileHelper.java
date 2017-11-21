@@ -8,7 +8,7 @@ import java.io.File;
 public class FileHelper {
     private static final String resourcesDirName = "resources";
     private static final String configFileName = "config.properties";
-    private static final String testDataFileName = "testData.xlsx";
+    private static final String testDataFileName = "testdata.xlsx";
 
     /**
      *  Returning a single directory name here might seem weird.

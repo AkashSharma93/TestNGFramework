@@ -20,4 +20,8 @@ public class RowData {
     public String getColumnValue(String columnName) {
         return dataMap.get(columnName);
     }
+
+    public Map<String, String> getDataMap() {
+        return dataMap;
+    }
 }

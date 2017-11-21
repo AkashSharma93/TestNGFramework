@@ -1,8 +1,11 @@
 package fragments;
 
+import dataaccess.excelhelper.TestDataHeaders;
 import org.openqa.selenium.WebDriver;
 import utilities.WebDriverUtils;
 import xpaths.BookingPanelXPaths;
+
+import java.util.Map;
 
 /**
  * Created by akash on 21/11/17.
@@ -40,11 +43,11 @@ public class BookingPanel implements BookingPanelXPaths {
         return true;
     }
 
-    public boolean enterEmailDetails(WebDriver webDriver) {
+    public boolean enterEmailDetails(WebDriver webDriver, String emailID) {
         WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
         System.out.println("Entering email details.");
         try {
-            wdUtils.sendKeys(emailField, "testUser@gmail.com");
+            wdUtils.sendKeys(emailField, emailID);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -64,24 +67,27 @@ public class BookingPanel implements BookingPanelXPaths {
         return true;
     }
 
-    public boolean enterTravellerDetails(WebDriver webDriver) {
+    public boolean enterTravellerDetails(WebDriver webDriver, Map<String, String> testData) {
         WebDriverUtils wdUtils = new WebDriverUtils(webDriver);
         System.out.println("Entering traveller details.");
-        String travellerTitle = "Mr";
-        String firstname = "Akash";
-        String lastname = "Sharma";
-        String dob = "6/Dec/1993";
-        String passportNumber = "123456789";
-        String visaType = "Tourist";
-        String contactNumber = "9845123456";
+
+        String travellerName = testData.get(TestDataHeaders.travellerName);
+        String nameTokens[] = travellerName.split(" ");
+        String travellerTitle = nameTokens[0];
+        String firstName = nameTokens[1];
+        String lastName = nameTokens[2];
+        String dob = testData.get(TestDataHeaders.dateOfBirth);
+        String passportNumber = testData.get(TestDataHeaders.passportNumber);
+        String visaType = testData.get(TestDataHeaders.visaType);
+        String contactNumber = testData.get(TestDataHeaders.contactNumber);
 
 
         // Assuming I'll be adding only one traveller for now. Hence the '1' in the name.
         // TODO: Will need to handle the indexes in the future.
         try {
             wdUtils.selectFromList(getSelectXPath("AdultTitle1"), travellerTitle);
-            wdUtils.sendKeys(getTextXPath("AdultFname1"), firstname);
-            wdUtils.sendKeys(getTextXPath("AdultLname1"), lastname);
+            wdUtils.sendKeys(getTextXPath("AdultFname1"), firstName);
+            wdUtils.sendKeys(getTextXPath("AdultLname1"), lastName);
 
             String tokens[] = dob.split("/");
             wdUtils.selectFromList(getSelectXPath("AdultDobDay1"), tokens[0]);
